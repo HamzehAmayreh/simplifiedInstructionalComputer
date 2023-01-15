@@ -22,7 +22,7 @@ public class Main {
             myWriterSt = new FileWriter("SymbolTable.txt");
             String line = reader.readLine();
             String[] temp = line.split("\\s+");
-            String prev = temp[1];
+            //String prev = temp[1];
             if (Objects.equals(temp[1], "START")) {
                 LOCCTR = startingAddress = Integer.parseInt(temp[2], 16);
             }
@@ -44,7 +44,7 @@ public class Main {
                 counter += 5;
                 if (!Objects.equals(temp[0], "\t") && !temp[0].equals("")) {
                     if (symbolTable.containsKey(temp[0])) {
-//                        throw new IOException("duplicate symbol");
+                        throw new IOException("duplicate symbol");
                     } else {
                         symbolTable.put(temp[0], Integer.toHexString(LOCCTR));
                         myWriterSt.write(temp[0]);
@@ -53,6 +53,7 @@ public class Main {
                         myWriterSt.write("\n");
                     }
                 }
+
                 if (Objects.equals(temp[1], "WORD")) prevLoc = 3;
                 else if (Objects.equals(temp[1], "RESW")) prevLoc = 3 * Integer.parseInt(temp[2]);
                 else if (Objects.equals(temp[1], "RESB")) {
@@ -64,7 +65,7 @@ public class Main {
                         prevLoc = (temp[2].length() - 3) % 2 == 0 ? (temp[2].length() - 3) / 2 : (temp[2].length() - 3) / 2 + 1;
                 else prevLoc = 3;
                 //else throw new IOException("invalid operation code");
-                prev = temp[1];
+                //prev = temp[1];
                 line = reader.readLine();
                 if (line == null) break;
                 else {
